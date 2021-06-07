@@ -11,4 +11,3 @@ class HomePageTest(TestCase):
         """Тест: используется домашний шаблон"""
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'lists/home.html')
-
