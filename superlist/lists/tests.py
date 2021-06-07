@@ -12,3 +12,4 @@ class HomePageTest(TestCase):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'lists/home.html')
 
+
