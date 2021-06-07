@@ -7,17 +7,8 @@ from .views import home_page
 class HomePageTest(TestCase):
     """Тест домашней страницы"""
 
-    def test_root_url_resolves_to_home_page_view(self):
-        """Тест: корневой url преобразуется в представление домашней страницы"""
-        found = resolve('/')
-        self.assertEqual(found.func, home_page)
-
-    def test_home_page_returns_correct_html(self):
-        """Тест: домашняя страница возвращает правильный html"""
-        request = HttpRequest()
-        response = home_page(request)
-        html = response.content.decode('utf8')
-        self.assertTrue(html.startswith('<html>'))
-        self.assertIn('<title>To-Do list</title>', html)
-        self.assertTrue(html.endswith('</html>'))
+    def test_uses_home_template(self):
+        """Тест: используется домашний шаблон"""
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'lists/home.html')
 
