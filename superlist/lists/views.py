@@ -5,11 +5,13 @@ from django.http import HttpResponse
 
 def home_page(request):
     """Домашняяя страница"""
-    if request.method == "POST":
-        new_item_text = request.POST["item_text"]
-        Item.objects.create(text=new_item_text)
-        return redirect('/lists/only_one_list_in_the_world/')
     return render(request, 'lists/home.html')
+
+
+def new_list(request):
+    """Новый список"""
+    Item.objects.create(text=request.POST['item_text'])
+    return redirect('view_list')
 
 
 def view_list(request):
