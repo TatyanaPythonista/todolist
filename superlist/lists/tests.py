@@ -1,8 +1,5 @@
-from django.test import TestCase
+from django.test import TestCase, LiveServerTestCase
 from .models import Item, List
-from django.urls import resolve
-from django.http import HttpRequest
-from .views import home_page
 
 
 class HomePageTest(TestCase):
@@ -129,4 +126,3 @@ class NewItemTest(TestCase):
         )
 
         self.assertRedirects(response, f'/lists/{correct_list.id}/')
-
