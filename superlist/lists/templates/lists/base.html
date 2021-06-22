@@ -1,19 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>To-Do list</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link type="text/css" href="{% static 'lists/bootstrap/css/bootstrap.css' %}" rel="stylesheet" />
+    <link type="text/css" href="{% static 'lists/css/base.css' %}" rel="stylesheet" />
 </head>
 <body>
-    <h1>{% block header_text %}{% endblock %}</h1>
-    <form method="POST" action="{% block form_action %}{% endblock %}">
-        {% csrf_token %}
-        <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
-    </form>
-    {% block table %}
-    {% endblock %}
-</body>
-</html>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 jumbotron">
+                <div class="text-center">
+                    <h1>{% block header_text %}{% endblock %}</h1>
+                    <form method="POST" action="{% block form_action %}{% endblock %}">
+                        {% csrf_token %}
+                        <input name="item_text" id="id_new_item"
+                               class="form-control input-lg" placeholder="Enter a to-do item" />
+                    </form>
+                </div>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                {% block table %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>
