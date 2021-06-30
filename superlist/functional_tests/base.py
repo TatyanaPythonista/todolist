@@ -35,3 +35,14 @@ class FunctionalTest(StaticLiveServerTestCase):
                 if time.time() - start_time > MAX_WAIT:
                     raise ex
                 time.sleep(0.5)
+
+    def wait_for(self, fn):
+        """Ожидать"""
+        start_time = time.time()
+        while True:
+            try:
+                return fn()
+            except (AssertionError, WebDriverException) as ex:
+                if time.time() - start_time > MAX_WAIT:
+                    raise ex
+                time.sleep(0.5)
