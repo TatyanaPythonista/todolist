@@ -25,11 +25,7 @@ def new_list(request):
 def view_list(request, list_id):
     """Представление списка"""
     list_ = List.objects.get(id=list_id)
+    if request.method == 'POST':
+        Item.objects.create(text=request.POST['item_text'], list=list_)
+        return redirect('view_list', list_.id)
     return render(request, 'lists/list.html', {'list': list_})
-
-
-def add_item(request, list_id):
-    """Добавить элемент"""
-    list_ = List.objects.get(id=list_id)
-    Item.objects.create(text=request.POST['item_text'], list=list_)
-    return redirect(f'/lists/{list_.id}/')
