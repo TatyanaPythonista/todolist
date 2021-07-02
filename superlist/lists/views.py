@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
+from lists.forms import ItemForm
 from .models import Item, List
 from django.core.exceptions import ValidationError
 
 
 def home_page(request):
     """Домашняяя страница"""
-    return render(request, 'lists/home.html')
+    return render(request, 'lists/home.html', {'form': ItemForm()})
 
 
 def new_list(request):

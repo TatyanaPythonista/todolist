@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.utils.html import escape
-
+from lists.forms import ItemForm
 from lists.models import List, Item
 
 
@@ -11,6 +11,11 @@ class HomePageTest(TestCase):
         """Тест: используется домашний шаблон"""
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'lists/home.html')
+
+    def test_home_page_uses_item_form(self):
+        """Тест: домашняя страница использует форму для элемента"""
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm)
 
 
 class ListViewTest(TestCase):
@@ -87,7 +92,6 @@ class ListViewTest(TestCase):
         self.assertTemplateUsed(response, 'lists/list.html')
         expected_error = escape("You can't have an empty list item")
         self.assertContains(response, expected_error)
-
 
 
 class NewListTest(TestCase):
